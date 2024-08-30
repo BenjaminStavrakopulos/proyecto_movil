@@ -1,0 +1,7 @@
+{
+  "name": "TearsInteractive",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
