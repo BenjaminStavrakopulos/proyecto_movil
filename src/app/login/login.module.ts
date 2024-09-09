@@ -1,17 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { IonicModule } from '@ionic/angular';
-import { WeaponsPageRoutingModule } from './weapons-routing.module';
-import { WeaponsPage } from './weapons.page';
+
+import { LoginPageRoutingModule } from './login-routing.module';
+
+import { LoginPage } from './login.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    WeaponsPageRoutingModule
+    LoginPageRoutingModule
   ],
-  declarations: [WeaponsPage]
+  declarations: [LoginPage]
 })
-export class WeaponsPageModule {}
+export class LoginPageModule {}
