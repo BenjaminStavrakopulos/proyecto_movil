@@ -4,6 +4,9 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Inicio</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">Cerrar Sesión</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -16,7 +19,6 @@
 
   <div id="home-container">
     <h1>Bienvenido a la Wiki de Tears of the Kingdom</h1>
-    <p>Encuentra toda la información sobre armas,jefes y más.</p>
-    <!-- Falta agregar contenido :p -->
+    <p>Encuentra toda la información sobre armas, jefes y más.</p>
   </div>
 </ion-content>

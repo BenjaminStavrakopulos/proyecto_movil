@@ -6,9 +6,11 @@
 
 <ion-content [fullscreen]="true">
   <ion-card>
-    <img alt="Login" src="https://preview.redd.it/bwv58k96gnn91.png?auto=webp&s=859d32becd83e1cc9470914f57df0c2d5be26d91" />
+
+    <img #loginImage alt="Login" src="https://preview.redd.it/bwv58k96gnn91.png?auto=webp&s=859d32becd83e1cc9470914f57df0c2d5be26d91" />
+    
     <ion-card-header>
-      <ion-card-title>Login</ion-card-title>      
+      <ion-card-title>Login</ion-card-title>
     </ion-card-header>
   
     <ion-card-content>
@@ -19,6 +21,9 @@
         <ion-input [(ngModel)]="password" type="password" label="Password" labelPlacement="floating" required></ion-input>
       </ion-item>
       <ion-button expand="block" (click)="ingresar()">Iniciar Sesión</ion-button>
+      <ion-text>
+        <a routerLink="/reset-password">¿Olvidaste tu contraseña?</a> <!-- Enlace para restablecer contraseña -->
+      </ion-text>
     </ion-card-content>
   </ion-card>
 </ion-content>
