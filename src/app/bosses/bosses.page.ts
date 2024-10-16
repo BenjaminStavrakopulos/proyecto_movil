@@ -1,5 +1,6 @@
-import { AnimationController, ModalController } from '@ionic/angular';
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { LoadingController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-bosses',
@@ -7,49 +8,44 @@ import { Component } from '@angular/core';
   styleUrls: ['./bosses.page.scss'],
 })
 export class BossesPage {
-  
-  modal: any; 
+  loading: any;
+  bosses: any[] = []; // Almacena la lista de monstruos
 
   constructor(
-    private animationCtrl: AnimationController, 
-    private modalCtrl: ModalController
-  ) {}
-
-
-  enterAnimation(baseEl: any) {
-    const backdropAnimation = this.animationCtrl
-      .create()
-      .addElement(baseEl.querySelector('ion-backdrop')!)
-      .fromTo('opacity', 0.01, 0.3);
-
-    const wrapperAnimation = this.animationCtrl
-      .create()
-      .addElement(baseEl.querySelector('.modal-wrapper')!)
-      .keyframes([
-        { offset: 0, opacity: '0', transform: 'scale(0)' },
-        { offset: 1, opacity: '1', transform: 'scale(1)' },
-      ]);
-
-    return this.animationCtrl.create().addElement(baseEl).easing('ease-out').duration(500).addAnimation([backdropAnimation, wrapperAnimation]);
+    private http: HttpClient,
+    private loadingController: LoadingController,
+    private toastController: ToastController
+  ) {
+    this.loadBosses(); // Cargar los monstruos al iniciar la página
   }
 
-
- 
-
-  async openModal() {
-    this.modal = await this.modalCtrl.create({
-      component: BossesPage,
-      enterAnimation: this.enterAnimation.bind(this),
-      
+  async loadBosses() {
+    this.loading = await this.loadingController.create({
+      message: 'Cargando monstruos...',
     });
+    await this.loading.present();
 
-    await this.modal.present(); 
+    const apiUrl = 'https://botw-compendium.herokuapp.com/api/v3/compendium/category/monsters';
+
+    this.http.get<any>(apiUrl).subscribe(
+      async (response) => {
+        this.bosses = response.data; // Almacena los datos de monstruos
+        await this.loading.dismiss();
+      },
+      async (error) => {
+        console.error('Error al cargar monstruos:', error);
+        await this.loading.dismiss();
+        this.presentToast('Error al cargar los datos de monstruos. Verifica tu conexión o la URL de la API.', 'top', 3000);
+      }
+    );
   }
 
-  async closeModal() {
-    if (this.modal) {
-      await this.modal.dismiss();
+  async presentToast(message: string, position: 'top' | 'middle' | 'bottom', duration: number) {
+    const toast = await this.toastController.create({
+      message,
+      duration,
+      position,
+    });
+    await toast.present();
   }
 }
-}
-
