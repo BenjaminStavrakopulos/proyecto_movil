@@ -20,10 +20,6 @@ const routes: Routes = [
     loadChildren: () => import('./bosses/bosses.module').then( m => m.BossesPageModule)
   },
   {
-    path: 'bosses',
-    loadChildren: () => import('./bosses/bosses.module').then(m => m.BossesPageModule)
-  },
-  {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
@@ -34,10 +30,6 @@ const routes: Routes = [
   {
     path: 'reset-password',
     loadChildren: () => import('./reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
-  },
-  {
-    path: 'reset-password',
-    loadChildren: () => import('./reset-password/reset-password.module').then(m => m.ResetPasswordPageModule)
   },
   
 
